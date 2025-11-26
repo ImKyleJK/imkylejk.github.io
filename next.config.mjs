@@ -2,7 +2,7 @@
 const nextConfig = {
 // <CHANGE> Added static export configuration
   output: 'export',
-  distDir: 'docs',
+  distDir: 'out',
   experimental: {
     turbopack: false,
   },
