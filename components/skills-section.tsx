@@ -7,11 +7,11 @@ const skillCategories = [
   {
     title: "Frontend",
     skills: [
-      { name: "React", level: 30 },
+      { name: "React", level: 10 },
       { name: "Next.js", level: 40 },
-      { name: "TypeScript", level: 30 },
+      { name: "TypeScript", level: 15 },
       { name: "Tailwind CSS", level: 90 },
-      { name: "HTML/CSS", level: 80 },
+      { name: "HTML/CSS", level: 85 },
     ],
   },
   {
@@ -19,16 +19,16 @@ const skillCategories = [
     skills: [
       { name: "Node.js", level: 90 },
       { name: "API Development", level: 90 },
-      { name: "Database Design", level: 60 },
+      { name: "Database Design", level: 50 },
       { name: "Authentication", level: 70 },
     ],
   },
   {
     title: "Tools & Workflow",
     skills: [
-      { name: "Git/GitHub", level: 90 },
+      { name: "Git/GitHub", level: 60 },
       { name: "VS Code", level: 95 },
-      { name: "Vercel", level: 80 },
+      { name: "Railway", level: 80 },
       { name: "Terminal/CLI", level: 60 },
     ],
   },
