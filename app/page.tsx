@@ -8,18 +8,22 @@ import { SkillsSection } from "@/components/skills-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { ContactSection } from "@/components/contact-section"
 
-const bootLines = [
-  "BIOS v2.4.1 - Kyle OS",
-  "Checking system memory... 16384MB OK",
-  "Detecting hardware...",
-  "  > CPU: Developer Brain v4.0",
-  "  > GPU: Creativity Engine",
-  "  > Storage: Infinite Ideas Drive",
-  "Loading kernel modules...",
-  "Initializing network interfaces...",
-  "Starting portfolio services...",
-  "Mounting /home/kyle/portfolio...",
-  "System ready.",
+const files = [
+  "main.js",
+  "app.js",
+  "components.js",
+  "styles.css",
+  "terminal.js",
+  "about.js",
+  "skills.js",
+  "projects.js",
+  "contact.js",
+  "utils.js",
+  "hooks.js",
+  "fonts.woff2",
+  "images.png",
+  "data.json",
+  "config.js",
 ]
 
 export default function Home() {
@@ -36,10 +40,12 @@ export default function Home() {
     }
 
     const interval = setInterval(() => {
-      if (lineIndexRef.current < bootLines.length) {
+      if (lineIndexRef.current < files.length) {
         const currentIndex = lineIndexRef.current
-        setLines((prev) => [...prev, bootLines[currentIndex]])
-        setProgress(((currentIndex + 1) / bootLines.length) * 100)
+        const fileName = files[currentIndex]
+        const progressText = `Loading ${fileName} (${currentIndex + 1}/${files.length})`
+        setLines([progressText]) // Show only current file
+        setProgress(((currentIndex + 1) / files.length) * 100)
         lineIndexRef.current++
       } else {
         clearInterval(interval)
@@ -57,12 +63,12 @@ export default function Home() {
 
   if (isBooting) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center font-mono">
-        <div className="w-full max-w-2xl px-8 space-y-4">
+      <div className="min-h-screen bg-background flex items-center justify-center font-mono px-4">
+        <div className="w-full max-w-md sm:max-w-2xl space-y-4">
           <div className="text-primary text-xs space-y-1">
             {lines.map((line, i) => (
               <div key={i}>
-                {line.startsWith("  >") ? <span className="text-muted-foreground">{line}</span> : <span>{line}</span>}
+                <span>{line}</span>
               </div>
             ))}
             <span className="inline-block w-2 h-4 bg-primary cursor-blink" />
