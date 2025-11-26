@@ -34,30 +34,46 @@ export default function Home() {
   const lineIndexRef = useRef(0)
 
   useEffect(() => {
-    if (hasCompletedRef.current) {
-      setIsBooting(false)
-      return
-    }
+    const loadedFiles: string[] = []
+    let totalEstimated = 15 // Estimate total resources
 
-    const interval = setInterval(() => {
-      if (lineIndexRef.current < files.length) {
-        const currentIndex = lineIndexRef.current
-        const fileName = files[currentIndex]
-        const progressText = `Loading ${fileName} (${currentIndex + 1}/${files.length})`
-        setLines([progressText]) // Show only current file
-        setProgress(((currentIndex + 1) / files.length) * 100)
-        lineIndexRef.current++
-      } else {
-        clearInterval(interval)
-        hasCompletedRef.current = true
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries() as PerformanceResourceTiming[]) {
+        // Track JS, CSS, and font files
+        if (entry.name.includes('/_next/') || 
+            entry.name.includes('.js') || 
+            entry.name.includes('.css') || 
+            entry.name.includes('.woff')) {
+          const fileName = entry.name.split('/').pop()?.split('?')[0] || 'unknown'
+          if (!loadedFiles.includes(fileName) && fileName !== 'unknown') {
+            loadedFiles.push(fileName)
+            const progressText = `Loading ${fileName} (${loadedFiles.length}/${totalEstimated})`
+            setLines([progressText])
+            setProgress(Math.min((loadedFiles.length / totalEstimated) * 100, 95))
+          }
+        }
+      }
+    })
+
+    observer.observe({ entryTypes: ['resource'] })
+
+    // Check when page is fully loaded
+    const checkComplete = () => {
+      if (document.readyState === 'complete') {
+        setProgress(100)
+        setLines(['Loading complete'])
         setTimeout(() => {
           setIsBooting(false)
         }, 500)
+      } else {
+        setTimeout(checkComplete, 100)
       }
-    }, 120)
+    }
+
+    checkComplete()
 
     return () => {
-      clearInterval(interval)
+      observer.disconnect()
     }
   }, [])
 
