@@ -33,11 +33,6 @@ export function AboutSection() {
               Kyle Kozlowski
             </h1>
             <p
-              className={`text-foreground transition-all duration-500 delay-300 ${isInView ? "opacity-100" : "opacity-0"}`}
-            >
-              <span className="text-accent">$</span> whoami
-            </p>
-            <p
               className={`text-muted-foreground leading-relaxed transition-all duration-500 delay-400 ${isInView ? "opacity-100" : "opacity-0"}`}
             >
               Freelance self-taught full-stack web developer with a passion for building innovative solutions. I

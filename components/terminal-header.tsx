@@ -25,7 +25,7 @@ export function TerminalHeader() {
               <div className="w-3 h-3 rounded-full bg-[#f59e0b]" />
               <div className="w-3 h-3 rounded-full bg-primary" />
             </div>
-            <span className="text-muted-foreground ml-2">kyle@portfolio:~$</span>
+            <span className="text-muted-foreground ml-2">imkylejk.me</span>
           </div>
           <div className="text-muted-foreground flex items-center gap-4">
             <span>{time}</span>

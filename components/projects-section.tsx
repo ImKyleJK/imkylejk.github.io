@@ -45,9 +45,6 @@ export function ProjectsSection() {
         <div className="flex gap-3">
           <span className="text-primary animate-pulse">▸</span>
           <div className="flex-1 space-y-4">
-            <p className="text-foreground">
-              <span className="text-accent">$</span> cd ./projects && ls -l
-            </p>
 
             {projects.map((project, index) => (
               <button

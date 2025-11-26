@@ -77,7 +77,7 @@ export function SkillsSection() {
           <span className="text-primary animate-pulse">▸</span>
           <div className="flex-1">
             <p className="text-foreground mb-4">
-              <span className="text-accent">$</span> ls -la ./skills
+              <span className="text-accent">NOTE:</span> The level of these skills is determined by my personal experience and proficiency with each technology.
             </p>
             <div className="grid md:grid-cols-3 gap-6">
               {skillCategories.map((category, catIndex) => (
