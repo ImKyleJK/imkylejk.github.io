@@ -8,7 +8,7 @@ import { useState } from "react"
 
 export function ContactSection() {
   const { ref, isInView } = useInView({ threshold: 0.2 })
-  const [formState, setFormState] = useState<"idle" | "loading" | "success">("idle")
+  const [formState, setFormState] = useState<"idle" | "loading" | "success" | "failed">("idle")
   const [formData, setFormData] = useState({ name: "", email: "", message: "" })
 
   const links = [
@@ -33,11 +33,8 @@ export function ContactSection() {
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    setFormState("success")
-    setTimeout(() => {
-      setFormState("idle")
-      setFormData({ name: "", email: "", message: "" })
-    }, 3000)
+    setFormState("failed")
+    setTimeout(() => setFormState("idle"), 3000)
   }
 
   return (
@@ -158,7 +155,7 @@ export function ContactSection() {
                   {formState === "idle" && (
                     <>
                       <Send className="w-4 h-4" />
-                      <span>Execute send_message.sh</span>
+                      <span>Send Message</span>
                     </>
                   )}
                   {formState === "loading" && (
@@ -171,6 +168,12 @@ export function ContactSection() {
                     <>
                       <Check className="w-4 h-4" />
                       <span>Message sent successfully!</span>
+                    </>
+                  )}
+                  {formState === "failed" && (
+                    <>
+                      <span className="text-destructive">✗</span>
+                      <span>Failed to send message. Try again.</span>
                     </>
                   )}
                 </button>
