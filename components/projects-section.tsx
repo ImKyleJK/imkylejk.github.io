@@ -15,7 +15,23 @@ export function ProjectsSection() {
         "A comprehensive service monitoring platform that allows developers and teams to monitor their security, performance, and uptime with ease.",
       url: "https://network.camp",
       status: "active",
-      tags: ["Full-Stack", "Featured"],
+      tags: ["MongoDB", "SaaS", "Redis", "NextJS", "API"],
+    },
+    {
+      name: "ImKyleJK",
+      description:
+        "My personal portfolio website showcasing my skills, projects, and contact information as a freelance full-stack web developer.",
+      url: "https://imkylejk.me",
+      status: "active",
+      tags: ["Personal", "GitHub Pages"],
+    },
+    {
+      name: "NetworkCamp Partner Portal",
+      description:
+        "A dedicated partner portal for NetworkCamp, enabling partners to manage their referal scheme, allow developers to access resources, and collaborate on addons.",
+      url: "https://partner.network.camp",
+      status: "active",
+      tags: ["MongoDB", "SaaS", "Redis", "NextJS", "API"],
     },
   ]
 
