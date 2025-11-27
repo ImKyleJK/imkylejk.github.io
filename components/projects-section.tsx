@@ -8,13 +8,40 @@ export function ProjectsSection() {
   const { ref, isInView } = useInView({ threshold: 0.2 })
   const [loadingProject, setLoadingProject] = useState<string | null>(null)
 
+  const statusConfig = {
+    active: {
+      label: "Active",
+      bgColor: "bg-primary/20",
+      textColor: "text-primary",
+      animation: "animate-pulse"
+    },
+    abandoned: {
+      label: "Abandoned",
+      bgColor: "bg-destructive/20",
+      textColor: "text-destructive",
+      animation: ""
+    },
+    "on-hold": {
+      label: "On Hold",
+      bgColor: "bg-yellow-500/20",
+      textColor: "text-yellow-600",
+      animation: ""
+    },
+    sold: {
+      label: "Sold",
+      bgColor: "bg-blue-500/20",
+      textColor: "text-blue-600",
+      animation: ""
+    }
+  }
+
   const projects = [
     {
       name: "Network Camp",
       description:
         "A comprehensive service monitoring platform that allows developers and teams to monitor their security, performance, and uptime with ease.",
       url: "https://network.camp",
-      status: "active",
+      status: "active" as keyof typeof statusConfig,
       tags: ["MongoDB", "SaaS", "Redis", "NextJS", "API"],
     },
     {
@@ -22,16 +49,16 @@ export function ProjectsSection() {
       description:
         "My personal portfolio website showcasing my skills, projects, and contact information as a freelance full-stack web developer.",
       url: "https://imkylejk.me",
-      status: "active",
+      status: "active" as keyof typeof statusConfig,
       tags: ["Personal", "GitHub Pages"],
     },
     {
-      name: "NetworkCamp Partner Portal",
+      name: "BeClone",
       description:
-        "A dedicated partner portal for NetworkCamp, enabling partners to manage their referal scheme, allow developers to access resources, and collaborate on addons.",
-      url: "https://partner.network.camp",
-      status: "active",
-      tags: ["MongoDB", "SaaS", "Redis", "NextJS", "API"],
+        "A BeReal clone web app that mimics the core functionalities of the original BeReal app, allowing users to share authentic moments with friends.",
+      url: "https://github.com/ImKyleJK/BeClone",
+      status: "abandoned" as keyof typeof statusConfig,
+      tags: ["Express.js", "Node.js"],
     },
   ]
 
@@ -54,7 +81,7 @@ export function ProjectsSection() {
         <span>╭─</span>
         <span>PROJECTS</span>
         <span className="flex-1 border-b border-border" />
-        <span className="text-xs text-muted-foreground">03</span>
+        <span className="text-xs text-muted-foreground">06</span>
       </div>
 
       <div className="space-y-4 text-sm">
@@ -78,17 +105,22 @@ export function ProjectsSection() {
                       <h3 className="text-primary font-bold group-hover:text-accent transition-colors">
                         {project.name}
                       </h3>
-                      <span className="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded animate-pulse">
-                        {project.status}
+                      <span className={`text-xs px-2 py-0.5 rounded ${statusConfig[project.status].bgColor} ${statusConfig[project.status].textColor} ${statusConfig[project.status].animation}`}>
+                        {statusConfig[project.status].label}
                       </span>
                     </div>
                     <p className="text-muted-foreground leading-relaxed">{project.description}</p>
-                    <div className="flex gap-2">
-                      {project.tags.map((tag) => (
-                        <span key={tag} className="text-xs text-accent">
-                          #{tag}
-                        </span>
-                      ))}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        {project.tags.map((tag) => (
+                          <span key={tag} className="text-xs text-accent">
+                            #{tag}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="text-xs text-muted-foreground ml-auto">
+                        {project.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
+                      </span>
                     </div>
                   </div>
                   {loadingProject === project.name ? (

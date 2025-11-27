@@ -150,7 +150,15 @@ export function ContactSection() {
                 <button
                   type="submit"
                   disabled={formState !== "idle"}
-                  className="w-full bg-primary text-primary-foreground font-bold py-2 px-4 rounded flex items-center justify-center gap-2 hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,255,65,0.3)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className={`w-full font-bold py-2 px-4 rounded flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
+                    formState === "idle"
+                      ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-[0_0_20px_rgba(0,255,65,0.3)]"
+                      : formState === "loading"
+                      ? "bg-primary text-primary-foreground"
+                      : formState === "success"
+                      ? "bg-green-600 text-white hover:bg-green-700"
+                      : "bg-destructive text-destructive-foreground animate-pulse hover:bg-destructive/90"
+                  }`}
                 >
                   {formState === "idle" && (
                     <>
@@ -172,7 +180,7 @@ export function ContactSection() {
                   )}
                   {formState === "failed" && (
                     <>
-                      <span className="text-destructive">✗</span>
+                      <span className="text-lg">✗</span>
                       <span>Failed to send message. Try again.</span>
                     </>
                   )}
