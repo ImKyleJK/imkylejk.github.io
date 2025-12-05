@@ -45,6 +45,13 @@ export function ProjectsSection() {
       tags: ["MongoDB", "SaaS", "Redis", "NextJS", "API"],
     },
     {
+      name: "TransferTo",
+      description:
+        "A cloud storage web app that enables users to upload, and share files securely  with others through unique links.",
+      url: "https://transferto.app",
+      status: "active" as keyof typeof statusConfig,
+      tags: ["NextJS", "Cloud Storage"],
+    },    {
       name: "ImKyleJK",
       description:
         "My personal portfolio website showcasing my skills, projects, and contact information as a freelance full-stack web developer.",
